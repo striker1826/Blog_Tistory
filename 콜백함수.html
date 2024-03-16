@@ -1,0 +1,373 @@
+<html lang="ko" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="og:title" content="콜백함수" />
+    <meta property="og:description" content="콜백함수를 설명하는 티스토리 포스팅 입니다." />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/tlatjdgh3778/post/045ddff9-da29-4e08-b61a-0a3172eaa798/%EC%BD%9C%EB%B0%B1%20%ED%95%A8%EC%88%98.png"
+    />
+    <meta property="og:type" content="website" />
+
+    <title>콜백함수</title>
+
+    <style>
+      html {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #666;
+      }
+      body {
+        margin: 0;
+      }
+
+      span {
+        color: #ee2323;
+      }
+
+      .contentText {
+        background-color: aliceblue;
+      }
+
+      .imgContainer {
+        /* display: flex; */
+        /* gap: 15px; */
+        justify-content: center;
+      }
+
+      .imgContainer img {
+        width: 30%;
+        height: 4%;
+      }
+
+      .admonition {
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 300;
+        /* padding: 1rem; */
+        border-width: 1px 1px 1px 6px;
+        border-style: solid;
+        box-shadow: 0 1px 5px 0 rgb(0 0 0 / 0.1), 0 1px 5px -1px rgb(0 0 0 / 0.1);
+        max-width: 56rem;
+      }
+
+      .admonition.tip {
+        border-color: rgb(16 185 129 / 0.1);
+        border-left-color: #10b981;
+        background-color: #ff910005;
+        color: rgb(20 83 45);
+      }
+
+      .admonition .title {
+        background-color: #d1fae5;
+        padding: 1rem;
+      }
+
+      .admonition.tip .content {
+        padding-left: 1rem;
+      }
+
+      .contextDiv {
+        background-color: #d1fae5;
+      }
+
+      .contextList li {
+        font-size: 24px;
+        font-weight: 500;
+        border-bottom: 1px solid #10b981;
+        padding: 10px 20px;
+      }
+
+      hr {
+        background-color: #ee2323;
+      }
+
+      .toc__menu {
+        list-style: none !important;
+        color: #000000 !important;
+      }
+    </style>
+
+    <!-- bootstrap5 -->
+    <link
+      id="myboot"
+      rel="stylesheet"
+      href="https://tistory1.daumcdn.net/tistory/4939852/skin/images/b-boot.css?_version_=1707099925"
+    />
+
+    <!-- main -->
+    <link
+      id="main"
+      href="https://tistory1.daumcdn.net/tistory/4939852/skin/style.css?_version_=1707099925"
+      rel="stylesheet"
+    />
+    <link id="style_last" />
+
+    <link
+      id="devicon"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      media="all"
+      onload="this.media='all'"
+    />
+    <link
+      id="fa_pro"
+      rel="stylesheet"
+      href="https://tistory1.daumcdn.net/tistory/4939852/skin/images/fontAwesomePro5.css?_version_=1707099925"
+      media="all"
+      onload="this.media='all'"
+    />
+    <link id="d2coding" />
+    <link id="__hljs" rel="stylesheet" />
+
+    <style class="fslightbox-styles">
+      h2 {
+        font-size: 26px;
+      }
+    </style>
+    <link
+      media="all"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+    />
+  </head>
+
+  <body id="tt-body-page">
+    <div id="__tidory" class="loaded">
+      <main id="__main">
+        <div id="permalink_article">
+          <div class="article permalink mt-0 pt-0">
+            <!-- ******************** 본문 ******************** -->
+            <h2 data-ke-size="size26" style="border: none; margin-top: 150px; margin-bottom: -40px">콜백함수</h2>
+            <article id="postArticle" class="content z-index-5" style="margin-top: 120px">
+              <!-- 본문 내용 시작 -->
+              <div id="article_rep" data-content="">
+                <!-- 목차 toc -->
+                <nav class="toc2 book-toc">
+                  <h4 class="nav__title" style="color: #fff"><i class="fal fa-list-ol"></i> 목차</h4>
+                  <ol class="toc__menu" style="list-style: none; text-decoration: none">
+                    <li>
+                      <a href="#무엇을 콜백함수라고 부르는가?" style="text-decoration: none"
+                        >무엇을 콜백함수라고 부르는가?</a
+                      >
+                      <ol>
+                        <li><a href="#중요한 포인트" style="text-decoration: none">중요한 포인트</a></li>
+                      </ol>
+                    </li>
+                    <li>
+                      <a href="#함수의 제어권을 넘겨주는 방법" style="text-decoration: none"
+                        >함수의 제어권을 넘겨주는 방법</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#비동기로 데이터를 가져오는 콜백함수" style="text-decoration: none"
+                        >비동기로 데이터를 가져오는 콜백함수</a
+                      >
+                    </li>
+                    <li><a href="#콜백 지옥" style="text-decoration: none">콜백 지옥</a></li>
+                    <li><a href="#정리" style="text-decoration: none">정리</a></li>
+                  </ol>
+                </nav>
+
+                <script id="toctoc"></script>
+
+                <div class="tt_article_useless_p_margin contents_style">
+                  <h1
+                    style="color: #000000; text-align: start"
+                    data-ke-size="size26"
+                    id="무엇을 콜백함수라고 부르는가?"
+                  >
+                    무엇을 콜백함수라고 부르는가?
+                  </h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/dMnMXf/btsFQOrKkPt/aitpsg7qwda0Dgnwzx8ch0/img.png"
+                    alt="main 함수"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    자, 여기 main이라는 함수가 있습니다. 다들 알고 있다시피 함수는 특정한 일을 하는 코드의 묶음입니다.
+                    함수는 다양한 일들을 하기 위해서 <span>매개변수</span>라는 값을 받아서 동작을 시킬 수가 있는데요.
+                    여기에서는 <span>param</span>이라는 값이 매개변수가 될겁니다.
+                  </p>
+
+                  <p class="contentText">
+                    이 함수는 <span>param</span>이라는 <span>매개변수</span>를 받아서 콘솔에 표시하는 아주 간단한 동작을
+                    하는 함수인데요. 이 param이라는 자리에는 <span>숫자 100</span>이 들어갈수도
+                    <span>글자 hello world</span>가 들어갈수도 아니면 <span>name은 kim age는 29</span>라는
+                    <span>객체</span>가 들어갈수도 있을겁니다.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <div class="imgContainer">
+                    <img
+                      src="https://blog.kakaocdn.net/dn/buTATu/btsFRh72k7d/2E9ZKKtMm6EgJMtWcqdfS1/img.png"
+                      alt="함수의 파라미터-숫자"
+                    />
+                    <img
+                      src="https://blog.kakaocdn.net/dn/1WQ3m/btsFRzUVZaT/zwflD08aBA8qvhX26S14R0/img.png"
+                      alt="함수의 파라미터-문자열"
+                    />
+                    <img
+                      src="https://blog.kakaocdn.net/dn/A39nA/btsFP67fNTc/403XdcxDRLbfBgWilO6qv1/img.png"
+                      alt="함수의 파라미터-객체"
+                    />
+                  </div>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    그런데 자바스크립트에서는 <span>함수를 또 다른 함수의 매개변수로 전달</span>할 수 있습니다. 함수를
+                    저기 보이는 param에 집어넣을수 있다는 것인데요.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/WcdSG/btsFQtgQSQK/NB5gKJ9HYPakOdjjEk34J1/img.png"
+                    alt="함수의 파라미터-함수"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    이렇게 <span>다른 함수의 파라미터</span>로 <span>전달되는 함수</span>를 콜백함수라고 합니다. 그리고
+                    이 콜백함수는 콜백함수를 <span>전달받은 함수에 의해서 호출</span>이 됩니다. Param에 전달된 함수는
+                    main함수가 실행해줄때까지 기다리고 있다가 <span>main 함수가 호출을 하면 실행</span>이 되는 것이죠.
+                    그래서 이름이 콜백함수 입니다. 나는 함수를 전달해줄테니 네 일이 다 끝나면 내가 전달해준 함수를
+                    실행시켜줘라는 개념이죠.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h3 data-ke-size="size23" id="중요한 포인트">중요한 포인트</h3>
+                  <p class="contentText">
+                    여기서 중요한 점은 네가 할일이 끝나면 전달해준 함수를 실행시켜달라는 부분입니다. 줄여서 말하면
+                    파라미터로 전달된 <span>함수의 실행 제어권을 main함수에게 넘겨준 것이죠</span>. 이 부분이 정말
+                    중요한 핵심개념입니다. 콜백함수가 생겨난 이유이기도 하고요. 왜냐하면 이렇게 실행 제어권을
+                    넘겨줌으로서 <span>비동기 함수를 동기적으로 수행</span>할 수가 있게 되기 때문입니다.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h1
+                    style="color: #000000; text-align: start"
+                    data-ke-size="size26"
+                    id="함수의 제어권을 넘겨주는 방법"
+                  >
+                    함수의 제어권을 넘겨주는 방법
+                  </h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/IbjG9/btsFPq50ocf/zfEGrMNFXxPQ6EXs2VKPp1/img.png"
+                    alt="main 함수"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    자, <span>main이라는 함수</span>가 있습니다. Main 함수는 콘솔에다가 받은 인자값 x를 찍어주는
+                    함수입니다. 그리고 <span>sayHi라는 함수</span>가 있습니다. 이 sayHi라는 함수는 콘솔에다가 Hi라는
+                    문자를 찍어주는 간단한 함수입니다. 이제 main 함수에 sayHi 함수를 넣어주었습니다. 콘솔에는 어떠한
+                    값이 찍히게 될까요?
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/vTOgj/btsFQP5euFB/ocLgE94RSM6k05CDxAkcK0/img.png"
+                    alt="main함수의 결과"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    <span>sayHi 함수가 찍히게 될것입니다.</span> 즉, main함수에 파라미터로 전달된 sayHi 함수는 해당
+                    함수의 리턴값이 아닌 <span>함수 그 자체가 전달</span>된 것이죠. 그러므로 이제 main함수 내부에서
+                    <span>sayHi 함수</span>를 <span>내가 원하는 타이밍에 실행</span>시킬 수 있게 된 것입니다
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/bDKadH/btsFP3QuYHX/a0eRj0od8wBAkMWWjQuKt1/img.png"
+                    alt="main함수의 결과"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    이런 식으로 전달받은 <span>sayHi 함수인 파라미터 x</span>를 실행시키게 되면 <span>Hi!</span>라는
+                    문자열이 콘솔에 찍히게 될 것입니다. 자, 그럼 이제 콜백 함수가 무엇인지는 알 것 같은데 그래서 이 콜백
+                    함수가 <span>왜 생겨났고 어째서 사용하는 것인지</span>가 궁금할 겁니다. 예시를 하나 보도록
+                    하겠습니다.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/b2FY4P/btsFRCYprSz/tDURTNu1rpCwyjpjPqDyzK/img.png"
+                    alt="main함수"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h1
+                    style="color: #000000; text-align: start"
+                    data-ke-size="size26"
+                    id="비동기로 데이터를 가져오는 콜백함수"
+                  >
+                    비동기로 데이터를 가져오는 콜백함수
+                  </h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    아까와 같은 코드지만 <span>main 함수 내부에서 어떠한 작업들</span>을 하고 있습니다. 그리고 그 작업들
+                    사이에서 x인 sayHi 함수를 실행시키고 있죠. 아까 말씀드렸다시피 main 함수의 파라미터 값으로 sayHi
+                    함수를 전달했기 때문에 <span>sayHi 함수의 제어권을 main 함수</span>가 가지고 있습니다. Main 함수는
+                    sayHi 함수를 작업을 진행하다가 원하는 타이밍에 실행시킬 수 있죠. 만약에 해당 작업들이
+                    <span>어딘가에 API 콜을 날려서 데이터를 가져오는 작업</span>이라고 한다면 어떨까요? 해당 작업들은
+                    <span>비동기로 동작</span>하게 될 것이고 <span>먼저 완료되는 작업들이 먼저 실행</span>되기 떄문에
+                    순서가 뒤죽박죽 섞이게 될 것입니다. 그런데 이런 상황에서 콜백함수를 사용하게 되면 이 작업들을
+                    <span>순서대로 실행</span>시킬 수 있게 됩니다.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/ckiy8Y/btsFPF3rHpS/qziGX6wl3t6DlsUKnyd0kk/img.png"
+                    alt="비동기로 데이터를 가져오는 코드의 콜백함수 예시"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    위 코드는 <span>사용자의 이름을 시작</span>으로 <span>사용자의 나이</span>,
+                    <span>사용자의 12간지 띠</span>를 얻어오는 코드입니다. 우선은 get 요청으로 name을 가져오고 name을
+                    이용해서 age를 age를 이용해서 animal을 가져오는 과정이죠. 이렇게 순차적으로 실행되는 작업들에서
+                    콜백함수는 필수적인 과정이었습니다. <span>비동기적인 흐름</span>을
+                    <span>동기적으로 바꿀 수 있었기 때문이죠.</span> 하지만 더 이러한 방식의 콜백함수는 사용하지
+                    않습니다. 콜백함수 자체를 사용하지 않는다는 것이 아니라
+                    <span>비동기적인 흐름을 제어하기 위해서 콜백함수를 사용하지 않는다는 뜻입니다.</span>
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="콜백 지옥">콜백 지옥</h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    이러한 과정의 가장 큰 문제는 <span>가독성을 심하게 해친다는 부분</span>입니다. 지금은 3개의
+                    request만 요청하고 있지만 만약 이러한 request가 10개 20개 된다면 어떻게 될까요?
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/v9rS5/btsFQRvdlgX/vqavYTH4zP8ksv9mYeMt1k/img.png"
+                    alt="콜백 지옥의 예시"
+                  />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    이러한 웃지 못할 코드가 완성 될 겁니다.
+                    <span>가독성은 물론이고 코드의 흐름을 파악하기도 힘들겠죠…</span> 이러한 문제점을 해결하기 위해서
+                    나온것이 <span>then</span> 그리고 <span>async, await</span> 입니다. 이 발표는 콜백 함수에 대한
+                    발표이기 때문에 then, async/await에 대해서는 설명하지 않겠습니다.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="정리">정리</h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p class="contentText">
+                    정리하자면 콜백 함수란
+                    <span>함수 A의 매개변수로 함수 B를 전달하여 A함수의 내부에서 B함수를 실행하는 것.</span> 그리고
+                    <span>A 함수에게 B 함수의 제어권을 넘겨주어</span> A 함수가
+                    <span>원하는 타이밍에 B 함수를 실행시키는 것.</span>
+                    그럼으로서 <span>비동기 작업을 동기적으로 수행할 수 있다는것</span>이 콜백함수였습니다.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
