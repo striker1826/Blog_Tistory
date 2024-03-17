@@ -1,0 +1,340 @@
+<html lang="ko" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="og:title" content="HTTP Method의 종류와 의미" />
+    <meta property="og:description" content="HTTP Method의 종류와 의미를 설명하는 포스팅 입니다." />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/ellyheetov/post/6b392c42-ee7d-4ab6-9869-dd119fdb18e1/Screen%20Shot%202021-05-15%20at%206.16.18%20PM.png"
+    />
+    <meta property="og:type" content="website" />
+
+    <title>HTTP Method의 종류와 의미</title>
+
+    <style>
+      html {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #666;
+      }
+      body {
+        margin: 0;
+      }
+
+      p span {
+        color: #ee2323;
+      }
+
+      .admonition {
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 300;
+        /* padding: 1rem; */
+        border-width: 1px 1px 1px 6px;
+        border-style: solid;
+        box-shadow: 0 1px 5px 0 rgb(0 0 0 / 0.1), 0 1px 5px -1px rgb(0 0 0 / 0.1);
+        max-width: 56rem;
+      }
+
+      .admonition.tip {
+        border-color: rgb(16 185 129 / 0.1);
+        border-left-color: #10b981;
+        background-color: #ff910005;
+        color: rgb(20 83 45);
+      }
+
+      .admonition .title {
+        background-color: #d1fae5;
+        padding: 1rem;
+      }
+
+      .admonition.tip .content {
+        padding-left: 1rem;
+      }
+
+      .contextDiv {
+        background-color: #d1fae5;
+      }
+
+      .contextList li {
+        font-size: 24px;
+        font-weight: 500;
+        border-bottom: 1px solid #10b981;
+        padding: 10px 20px;
+      }
+
+      hr {
+        background-color: #ee2323;
+      }
+
+      .toc__menu {
+        list-style: none !important;
+        color: #000000 !important;
+      }
+    </style>
+
+    <!-- bootstrap5 -->
+    <link
+      id="myboot"
+      rel="stylesheet"
+      href="https://tistory1.daumcdn.net/tistory/4939852/skin/images/b-boot.css?_version_=1707099925"
+    />
+
+    <!-- main -->
+    <link
+      id="main"
+      href="https://tistory1.daumcdn.net/tistory/4939852/skin/style.css?_version_=1707099925"
+      rel="stylesheet"
+    />
+    <link id="style_last" />
+
+    <link
+      id="devicon"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      media="all"
+      onload="this.media='all'"
+    />
+    <link
+      id="fa_pro"
+      rel="stylesheet"
+      href="https://tistory1.daumcdn.net/tistory/4939852/skin/images/fontAwesomePro5.css?_version_=1707099925"
+      media="all"
+      onload="this.media='all'"
+    />
+    <link id="d2coding" />
+    <link id="__hljs" rel="stylesheet" />
+
+    <style class="fslightbox-styles">
+      h2 {
+        font-size: 26px;
+      }
+    </style>
+    <link
+      media="all"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+    />
+  </head>
+
+  <body id="tt-body-page">
+    <div id="__tidory" class="loaded">
+      <main id="__main">
+        <div id="permalink_article">
+          <div class="article permalink mt-0 pt-0">
+            <!-- ******************** 본문 ******************** -->
+            <h2 data-ke-size="size26" style="border: none; margin-top: 150px; margin-bottom: -40px">HTTP Method</h2>
+            <article id="postArticle" class="content z-index-5" style="margin-top: 120px">
+              <!-- 본문 내용 시작 -->
+              <div id="article_rep" data-content="">
+                <!-- 목차 toc -->
+                <nav class="toc2 book-toc">
+                  <h4 class="nav__title" style="color: #fff"><i class="fal fa-list-ol"></i> 목차</h4>
+                  <ol class="toc__menu" style="list-style: none; text-decoration: none">
+                    <li>
+                      <a href="#HTTP Method란?" style="text-decoration: none">HTTP Method란?</a>
+                      <ol>
+                        <li><a href="#HTTP Method의 종류" style="text-decoration: none">HTTP Method의 종류</a></li>
+                        <li>
+                          <a href="#HTTP Method를 사용하는 이유" style="text-decoration: none"
+                            >HTTP Method를 사용하는 이유</a
+                          >
+                        </li>
+                      </ol>
+                    </li>
+                    <li><a href="#GET" style="text-decoration: none">GET</a></li>
+                    <li><a href="#POST" style="text-decoration: none">POST</a></li>
+                    <li><a href="#PUT" style="text-decoration: none">PUT</a></li>
+                    <li><a href="#PATCH" style="text-decoration: none">PATCH</a></li>
+                    <li><a href="#DELETE" style="text-decoration: none">DELETE</a></li>
+                  </ol>
+                </nav>
+
+                <script id="toctoc"></script>
+
+                <div class="tt_article_useless_p_margin contents_style">
+                  <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="HTTP Method란?">
+                    HTTP Method란?
+                  </h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p>
+                    웹 개발에서 HTTP 메서드는 클라이언트가 서버에 요청하는 동작을 나타냅니다. 이 메서드는 리소스에 대한
+                    작업을 명확하게 정의하여 서버가 요청을 처리하는 데 도움을 줍니다. 이 블로그 게시글에서는 널리
+                    사용되는 HTTP 메서드 5가지, GET, POST, PATCH, PUT, DELETE에 대해 자세히 알아봅니다.
+                  </p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+
+                  <h3 data-ke-size="size23" id="HTTP Method의 종류">HTTP Method의 종류</h3>
+                  <ul>
+                    <li>
+                      <h5>GET</h5>
+                      <p>리소스의 조회를 요청하는 메서드</p>
+                    </li>
+                    <li>
+                      <h5>POST</h5>
+                      <p>리소스의 생성을 요청하는 메서드</p>
+                    </li>
+                    <li>
+                      <h5>PUT</h5>
+                      <p>리소스의 수정을 요청하는 메서드</p>
+                    </li>
+                    <li>
+                      <h5>PATCH</h5>
+                      <p>리소스의 수정을 요청하는 메서드</p>
+                    </li>
+                    <li>
+                      <h5>DELETE</h5>
+                      <p>리소스의 삭제를 요청하는 메서드</p>
+                    </li>
+                  </ul>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+
+                  <h3 data-ke-size="size23" id="HTTP Method를 사용하는 이유">HTTP Method를 사용하는 이유</h3>
+                  <ol>
+                    <li>
+                      <h5>1. 리소스와 동작을 분리하기 위해서</h5>
+                      <p>
+                        HTTP 프로토콜은 <span>URL을 통해 리소스를 식별</span>합니다. 하지만
+                        <span>URL만으로는 클라이언트가 서버에 어떤 작업을 요청하는지 알 수 없습니다.</span> 예를 들어,
+                        특정 게시글을 조회하는 것인지, 수정하는 것인지, 삭제하는 것인지를 구분할 수 없습니다. 따라서
+                        HTTP 메서드를 사용하여 <span>클라이언트가 서버에 요청하는 동작을 명시적으로 표현</span>할 수
+                        있습니다.
+                      </p>
+                    </li>
+                    <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                    <li><h5>2. 요청의 의미를 명확하게 하기 위해서</h5></li>
+                    <p>
+                      <span>HTTP 메서드는 각각 고유한 의미</span>를 가지고 있습니다. 예를 들어, GET 메서드는 리소스의
+                      조회를, POST 메서드는 리소스의 생성을 의미합니다. 따라서 HTTP 메서드를 사용하면
+                      <span>클라이언트의 의도를 명확하게 표현</span>할 수 있습니다. 이렇게 하면 서버는 요청을 정확하게
+                      처리하고 오류를 줄일 수 있습니다.
+                    </p>
+                  </ol>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="GET">GET</h1>
+                  <hr />
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h5><strong>사용목적:</strong> 리소스 조회</h5>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p>
+                    GET 메서드는 서버에 특정 리소스를 요청하는 데 사용됩니다. 웹 브라우저가 웹 페이지를 요청할 때, API가
+                    데이터를 가져올 때 등 다양한 상황에서 사용됩니다.
+                  </p>
+                  <p>서버에 전달하고 싶은 데이터는 <span>쿼리스트링</span>을 통해서 잔달합니다.</p>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <h5>예시</h5>
+                  <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                  <p>클라이언트에서 <span>10번 게시글을 가져오고 싶을 때 /post/10 으로 요청</span></p>
+                  <img
+                    src="https://blog.kakaocdn.net/dn/nqcWd/btsFQVK5Sc9/KHGZX31cQZfyBN515tH6rk/img.png"
+                    alt="GET 요청 예시"
+                  />
+                  <p>클라이언트가 GET으로 요청하면 서버는 해당 데이터를 응답해준다.</p>
+                </div>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="POST">POST</h1>
+                <hr />
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5><strong>사용목적:</strong> 리소스 조회</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>
+                  POST 메서드는 서버에 새로운 리소스를 생성하는 데 사용됩니다. 웹 폼을 통해 데이터를 전송하거나, 새로운
+                  사용자를 등록하는 등 다양한 상황에서 사용됩니다. 보통은 HTTP Body에 데이터를 담아서 서버에 데이터를
+                  전송합니다.
+                </p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5>예시</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>
+                  클라이언트에서
+                  <span>title: 블로그 제목... content: 블로그 내용... 이라는 데이터 생성을 서버에 요청</span>
+                </p>
+                <img
+                  src="https://blog.kakaocdn.net/dn/bArTyQ/btsFQVYF5co/RSVuSKjbWhGGiKkrI6GW71/img.png"
+                  alt="POST 요청 예시"
+                />
+                <p>서버는 해당 데이터를 받아서 DB에 저장한다.</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="PUT">PUT</h1>
+                <hr />
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5><strong>사용목적:</strong>리소스 전체 수정</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>
+                  PUT 메서드는 리소스를 전체적으로 대체하는 데 사용됩니다. 기존 리소스가 존재하면 새 리소스로 대체되고,
+                  리소스가 존재하지 않으면 새 리소스가 생성됩니다.
+                </p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5>예시</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>수정하려는 데이터가 이미 존재할 경우 <span>해당 데이터를 덮어쓴다.</span></p>
+                <img
+                  src="https://blog.kakaocdn.net/dn/c9cNxp/btsFQrXQehJ/0mPGrg6LDbsmX0U2hkRglK/img.png"
+                  alt="PUT 요청
+                예시"
+                />
+                <p>
+                  10번 게시글이 이미 존재하기 때문에 서버에 저장되어 있는 데이터를 클라이언트가 보낸 데이터로 덮어쓴다.
+                </p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>수정하려는 데이터가 존재하지 않을 경우 <span>데이터를 새로 생성한다.</span></p>
+                <img
+                  src="https://blog.kakaocdn.net/dn/clEEc0/btsFQfXH1hK/KMF8MfZGqQAeZ3NQC1NQW0/img.png"
+                  alt="PUT요청 예시"
+                />
+                <p>서버에 10번이라는 게시글이 없기 때문에 <span>클라이언트가 보낸 데이터를 새로 생성한다.</span></p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="PATCH">PATCH</h1>
+                <hr />
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5><strong>사용목적:</strong>리소스 부분 수정</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>
+                  PATCH 메서드는 리소스의 <span>일부 속성만 변경</span>하는 데 사용됩니다. 전체 리소스를 대체하는 PUT
+                  메서드와 달리, PATCH 메서드는 <span>변경하려는 속성만 지정하여 전송</span>합니다.
+                </p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5>예시</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>블로그의 제목만 수정하려는 경우</p>
+                <img
+                  src="https://blog.kakaocdn.net/dn/c4gEqr/btsFQVK5ZKD/Y2JU7vdWqsqrbg8UCFHhJ0/img.png"
+                  alt="PATCH 요청 예시"
+                />
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h1 style="color: #000000; text-align: start" data-ke-size="size26" id="DELETE">DELETE</h1>
+                <hr />
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5><strong>사용목적:</strong>리소스 삭제</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p>
+                  DELETE 메서드는 서버에서 <span>리소스를 삭제</span>하는 데 사용됩니다. 리소스가 삭제되면 더 이상
+                  사용할 수 없게 됩니다.
+                </p>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <h5>예시</h5>
+                <p data-ke-size="size16" style="margin-bottom: 0px !important">&nbsp;</p>
+                <p><span>10번 게시글을 삭제합니다.</span></p>
+                <img
+                  src="https://blog.kakaocdn.net/dn/dGZ5Lk/btsFSck3vaG/KiuW5aipnSeEp5UIPWsISk/img.png"
+                  alt="DELETE요청 예시"
+                />
+              </div>
+            </article>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
